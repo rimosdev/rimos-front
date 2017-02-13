@@ -1,11 +1,10 @@
 $( document ).ready(function() {
-    var numeros = new Array();
-	var $input = $("#numero");
-	var $cnt_resultado = $("#resultado");
-	var animNumeros;
+    var numeros = new Array(); //Array que acumula los NUMEROS ingresados
+	var $input = $("#numero"); //control de texto en la que se ingresan los numeros
+	var $cnt_resultado = $("#resultado"); //control en el que se mostrará la animación y el resultado
+	var animNumeros; //acumulador de iteraciones de animacion
 	var timeInterval = 100; //imtervalo de tiempo entre un numero y otro en la animacion
-	var sinDuplicados = [];
-	var cadenaOrdenada = "";
+	var cadenaOrdenada = ""; //cadena ordenada final
 	var $btn_ord = $("#btn_ord"); //boton ordenar
 
 	function addNumero()
@@ -32,11 +31,11 @@ $( document ).ready(function() {
 
 	function ordenar()
 	{
+		var sinDuplicados = []; //acumulador temporal de numeros no repetidos
 		//Se detiene animacion en caso de que se esté ejecutando
 		detenerAnimacion();
 
 		//validación duplicidad
-		sinDuplicados = [];
 		$.each(numeros, function(i, el){
 		    if($.inArray(el, sinDuplicados ) === -1) sinDuplicados .push(el);
 		});
