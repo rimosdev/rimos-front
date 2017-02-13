@@ -45,6 +45,7 @@ $( document ).ready(function() {
 		numeros = SinDuplicados.sort(deMenorAMayor);
 
 		$cnt_resultado.removeClass('hide'); //mostrandop el contenedor de la animacion
+		$cnt_resultado.html('...');
 		//animacion de ordenamiento
 		animNumeros = setTimeout(function(){
 					 muestraNumero(0)
