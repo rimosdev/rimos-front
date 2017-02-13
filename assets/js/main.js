@@ -3,7 +3,9 @@ $( document ).ready(function() {
 	var $input = $("#numero");
 	var $cnt_resultado = $("#resultado");
 	var animNumeros;
-	var timeInterval = 500; //imtervalo de tiempo entre un numero y otro en la animacion
+	var timeInterval = 100; //imtervalo de tiempo entre un numero y otro en la animacion
+	var SinDuplicados = [];
+	var cadenaOrdenada = "";
 
 	function add_numero()
 	{
@@ -16,17 +18,17 @@ $( document ).ready(function() {
 		$input.val('');
 		$input.focus();
 		//Se detiene animacion en caso de que se esté ejecutando
-		clearTimeout(animNumeros);
+		detenerAnimacion();
 	}
 
 	function ordenar()
 	{
 
 		//Se detiene animacion en caso de que se esté ejecutando
-		clearTimeout(animNumeros);
+		detenerAnimacion();
 
 		//validación duplicidad
-		var SinDuplicados = [];
+		SinDuplicados = [];
 		$.each(numeros, function(i, el){
 		    if($.inArray(el, SinDuplicados ) === -1) SinDuplicados .push(el);
 		});
@@ -36,13 +38,34 @@ $( document ).ready(function() {
 
 		$cnt_resultado.removeClass('hide'); //mostrandop el contenedor de la animacion
 		//animacion de ordenamiento
-		for (i in SinDuplicados) {
-			animNumeros = setTimeout(
-				function(){
-					$cnt_resultado.html(SinDuplicados[i])
-				},
-			timeInterval + timeInterval*i);
+		animNumeros = setTimeout(function(){
+					 muestraNumero(0)
+				},timeInterval);
+	}
+
+	function muestraNumero(i)
+	{
+		if(i < SinDuplicados.length)
+		{
+			cadenaOrdenada += " " + SinDuplicados[i];
+			$cnt_resultado.html(SinDuplicados[i]);
+			animNumeros = setTimeout(function(){
+					 muestraNumero(i + 1)
+				},timeInterval);
 		}
+		else
+		{
+			$cnt_resultado.html(cadenaOrdenada);
+			cadenaOrdenada = '';
+		}
+	}
+
+	function detenerAnimacion()
+	{
+		cadenaOrdenada = "";
+		$cnt_resultado.addClass('hide');
+		clearTimeout(animNumeros);
+
 	}
 
 
