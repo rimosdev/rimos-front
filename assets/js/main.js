@@ -4,11 +4,11 @@ $( document ).ready(function() {
 	var $cnt_resultado = $("#resultado");
 	var animNumeros;
 	var timeInterval = 100; //imtervalo de tiempo entre un numero y otro en la animacion
-	var SinDuplicados = [];
+	var sinDuplicados = [];
 	var cadenaOrdenada = "";
 	var $btn_ord = $("#btn_ord"); //boton ordenar
 
-	function add_numero()
+	function addNumero()
 	{
 		input_val = $input.val(),
 		item_val = ( /^[0-9]+$/.test(input_val) && input_val >= 0 ?  input_val : -1 );
@@ -36,13 +36,13 @@ $( document ).ready(function() {
 		detenerAnimacion();
 
 		//validación duplicidad
-		SinDuplicados = [];
+		sinDuplicados = [];
 		$.each(numeros, function(i, el){
-		    if($.inArray(el, SinDuplicados ) === -1) SinDuplicados .push(el);
+		    if($.inArray(el, sinDuplicados ) === -1) sinDuplicados .push(el);
 		});
 
 		//ordenamiento
-		numeros = SinDuplicados.sort(deMenorAMayor);
+		numeros = sinDuplicados.sort(deMenorAMayor);
 
 		$cnt_resultado.removeClass('hide'); //mostrandop el contenedor de la animacion
 		$cnt_resultado.html('...');
@@ -84,7 +84,7 @@ $( document ).ready(function() {
 	}
 
 	$("#btn_add").click(function() {
-		add_numero();
+		addNumero();
 	});
 
 	$btn_ord.click(function() {
