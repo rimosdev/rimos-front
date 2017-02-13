@@ -6,6 +6,7 @@ $( document ).ready(function() {
 	var timeInterval = 100; //imtervalo de tiempo entre un numero y otro en la animacion
 	var SinDuplicados = [];
 	var cadenaOrdenada = "";
+	var $btn_ord = $("#btn_ord"); //boton ordenar
 
 	function add_numero()
 	{
@@ -19,11 +20,18 @@ $( document ).ready(function() {
 		$input.focus();
 		//Se detiene animacion en caso de que se esté ejecutando
 		detenerAnimacion();
+		if(numeros.length > 0)
+		{
+			$btn_ord.removeClass('disabled');
+		}
+		else
+		{
+			$btn_ord.addClass('disabled');
+		}
 	}
 
 	function ordenar()
 	{
-
 		//Se detiene animacion en caso de que se esté ejecutando
 		detenerAnimacion();
 
@@ -34,7 +42,7 @@ $( document ).ready(function() {
 		});
 
 		//ordenamiento
-		SinDuplicados = SinDuplicados.sort(deMenorAMayor);
+		numeros = SinDuplicados.sort(deMenorAMayor);
 
 		$cnt_resultado.removeClass('hide'); //mostrandop el contenedor de la animacion
 		//animacion de ordenamiento
@@ -45,10 +53,10 @@ $( document ).ready(function() {
 
 	function muestraNumero(i)
 	{
-		if(i < SinDuplicados.length)
+		if(i < numeros.length)
 		{
-			cadenaOrdenada += " " + SinDuplicados[i];
-			$cnt_resultado.html(SinDuplicados[i]);
+			cadenaOrdenada += " " + numeros[i];
+			$cnt_resultado.html(numeros[i]);
 			animNumeros = setTimeout(function(){
 					 muestraNumero(i + 1)
 				},timeInterval);
@@ -57,6 +65,8 @@ $( document ).ready(function() {
 		{
 			$cnt_resultado.html(cadenaOrdenada);
 			cadenaOrdenada = '';
+			numeros = [];
+			$btn_ord.addClass('disabled');
 		}
 	}
 
@@ -65,7 +75,6 @@ $( document ).ready(function() {
 		cadenaOrdenada = "";
 		$cnt_resultado.addClass('hide');
 		clearTimeout(animNumeros);
-
 	}
 
 
@@ -77,7 +86,7 @@ $( document ).ready(function() {
 		add_numero();
 	});
 
-	$("#btn_ord").click(function() {
+	$btn_ord.click(function() {
 		ordenar();
 	});
 });

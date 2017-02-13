@@ -43,7 +43,7 @@
             </div>
             <div class="form-group">
                 <button class="btn btn-default" id="btn_add">Agregar</button>
-                <button class="btn btn-danger" id="btn_ord">Ordenar</button>
+                <button class="btn btn-danger disabled" id="btn_ord">Ordenar</button>
             <div>
 
             <div class="alert alert-success hide" id="resultado">...</div>
